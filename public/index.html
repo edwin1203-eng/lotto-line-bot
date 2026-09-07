@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>四合一樂透＋Gemini AI LINE 群組機器人</title>
+  <style>
+    :root{--bg:#061427;--panel:#10243b;--line:#29425e;--text:#f2f7fc;--muted:#9badc2;--mint:#59ddca;--blue:#5b8fd9;--bad:#ff8b93}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:calc(env(safe-area-inset-top) + 28px) 16px 55px;background:linear-gradient(155deg,#0b2440,#061427 45%,#04101f);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC",sans-serif}
+    main{max-width:760px;margin:auto}.eyebrow{color:var(--mint);font-weight:850;letter-spacing:.1em;font-size:13px}h1{font-size:30px;margin:8px 0}.sub{color:var(--muted);line-height:1.7;margin-bottom:22px}
+    .card{background:linear-gradient(145deg,rgba(18,42,67,.96),rgba(8,26,46,.98));border:1px solid var(--line);border-radius:26px;padding:20px;margin-bottom:15px;box-shadow:0 20px 45px rgba(0,0,0,.24)}h2{font-size:21px;margin:0 0 14px}.step{display:flex;gap:13px;margin:15px 0}.n{width:30px;height:30px;flex:0 0 auto;border-radius:10px;background:linear-gradient(145deg,var(--mint),#36a7a1);color:#082038;display:flex;align-items:center;justify-content:center;font-weight:900}.step p{margin:2px 0;color:#c7d5e3;line-height:1.65;font-size:14px}
+    code,.url{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#06172a;border:1px solid var(--line);border-radius:12px;padding:10px;color:#b7efe8;word-break:break-all;display:block;margin-top:8px;font-size:12px}.actions{display:flex;gap:9px;margin-top:10px}button{border:0;border-radius:13px;padding:11px 14px;background:linear-gradient(100deg,#36aaa5,var(--blue));color:#05182b;font-weight:900}
+    .status{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.chip{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(5,20,37,.45);color:var(--muted);font-size:12px}.chip strong{display:block;color:#fff;margin-top:6px}.ok strong{color:var(--mint)}.bad strong{color:var(--bad)}
+    .games{display:grid;grid-template-columns:1fr 1fr;gap:10px}.game{border:1px solid var(--line);border-radius:18px;padding:15px;background:rgba(5,20,37,.45)}.game strong{display:block;color:var(--mint);font-size:17px;margin-bottom:7px}.game span{color:var(--muted);font-size:13px;line-height:1.55}.game code{font-size:13px;margin-top:10px;padding:8px}
+    table{width:100%;border-collapse:collapse;font-size:13px}td{border-bottom:1px solid var(--line);padding:12px 6px;vertical-align:top}td:first-child{color:var(--mint);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;width:48%;word-break:break-word}.note{border-left:3px solid var(--mint);padding:10px 13px;background:rgba(89,221,202,.08);color:#bdd4df;line-height:1.65;font-size:13px;border-radius:0 12px 12px 0}
+    @media(max-width:520px){.status,.games{grid-template-columns:1fr}.card{padding:18px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">CLOUDFLARE × LINE MESSAGING API</div>
+  <h1>四合一樂透＋Gemini AI群組機器人</h1>
+  <div class="sub">原本四種近50期彩券分析完整保留；群組內只要 @機器人，就能快速聊天、看圖片、查台灣天氣、計算、抽籤或玩隨機遊戲。</div>
+
+  <section class="card">
+    <h2>目前狀態</h2>
+    <div class="status">
+      <div class="chip" id="secretChip">Channel Secret<strong>讀取中</strong></div>
+      <div class="chip" id="tokenChip">Access Token<strong>讀取中</strong></div>
+      <div class="chip" id="groupChip">限定群組<strong>讀取中</strong></div>
+      <div class="chip" id="aiChip">AI對話<strong>讀取中</strong></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>@機器人自動回答</h2>
+    <div class="games">
+      <div class="game"><strong>犀利AI＋搜尋</strong><span>回答直接、有結論；被挑釁時會用一句有梗的話反擊，最新資訊會自動搜尋。</span><code>@機器人 今天有什麼重要新聞</code></div>
+      <div class="game"><strong>台灣天氣</strong><span>免費查詢今天、明天或後天縣市預報。</span><code>@機器人 台北明天天氣</code></div>
+      <div class="game"><strong>圖片理解</strong><span>先傳圖片，10分鐘內再提及機器人。</span><code>@機器人 這張圖片有什麼？</code></div>
+      <div class="game"><strong>免費小工具</strong><span>計算、抽籤、骰子、硬幣、猜拳及隨機數。</span><code>@機器人 功能</code></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>群組指令</h2>
+    <div class="games">
+      <div class="game"><strong>大樂透</strong><span>近50期隔期拖牌，固定原版5支。</span><code>大樂透分析</code></div>
+      <div class="game"><strong>今彩539</strong><span>V5.8.11預設核心；不加連莊、不加近期拖牌。</span><code>539分析</code></div>
+      <div class="game"><strong>天天樂</strong><span>V3.1.3近50期原版隔期拖牌，固定5支；日期以台灣時區判定。</span><code>天天樂分析</code></div>
+      <div class="game"><strong>香港六合彩</strong><span>V1.0.2近50期正碼隔期拖牌，固定5支。</span><code>香港六合分析</code></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>部署與連線</h2>
+    <div class="step"><div class="n">1</div><p>在Cloudflare設定LINE Channel Secret、Access Token、限定群組及GEMINI_API_KEY。</p></div>
+    <div class="step"><div class="n">2</div><p>把本專案連接GitHub，部署命令使用 npx wrangler deploy --config wrangler.toml。</p></div>
+    <div class="step"><div class="n">3</div><p>將下方網址貼到LINE Developers的Webhook URL：<span class="url" id="webhookUrl"></span><span class="actions"><button id="copyWebhook">複製Webhook網址</button></span></p></div>
+    <div class="step"><div class="n">4</div><p>部署後原本四個彩券關鍵字照常使用；一般聊天只有真正 @機器人 時才會回覆。</p></div>
+  </section>
+
+  <section class="card">
+    <h2>可選排除號碼</h2>
+    <table>
+      <tr><td>BOT_LOTTO649_EXCLUDED_NUMBERS</td><td>大樂透排除號碼。</td></tr>
+      <tr><td>BOT_539_EXCLUDED_NUMBERS</td><td>今彩539排除號碼。</td></tr>
+      <tr><td>BOT_FANTASY5_EXCLUDED_NUMBERS</td><td>天天樂排除號碼。</td></tr>
+      <tr><td>BOT_MARKSIX_EXCLUDED_NUMBERS</td><td>香港六合彩排除號碼。</td></tr>
+    </table>
+    <p class="note">多個號碼用逗號隔開，例如「07,12,19」。這些設定都不是必填；未設定時完全依照各程式原本的5支核心分析。</p>
+  </section>
+</main>
+<script>
+  const endpoint=location.origin+'/webhook'
+  document.getElementById('webhookUrl').textContent=endpoint
+  document.getElementById('copyWebhook').onclick=async()=>{await navigator.clipboard.writeText(endpoint);document.getElementById('copyWebhook').textContent='已複製固定網址'}
+  fetch(endpoint).then(r=>r.json()).then(s=>{
+    const items=[['secretChip',s.channelSecretConfigured],['tokenChip',s.accessTokenConfigured],['groupChip',s.groupBound],['aiChip',s.aiConfigured]]
+    items.forEach(([id,ok])=>{const e=document.getElementById(id);e.classList.add(ok?'ok':'bad');e.querySelector('strong').textContent=ok?'已設定':'尚未設定'})
+  }).catch(()=>document.querySelectorAll('.chip strong').forEach(e=>e.textContent='讀取失敗'))
+</script>
+</body>
+</html>

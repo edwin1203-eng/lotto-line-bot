@@ -20,7 +20,7 @@
 <main>
   <div class="eyebrow">CLOUDFLARE × LINE MESSAGING API</div>
   <h1>四合一樂透＋Gemini AI群組機器人</h1>
-  <div class="sub">原本四種近50期彩券分析完整保留；群組內只要 @機器人，就能快速聊天、看圖片、查台灣天氣、計算、抽籤或玩隨機遊戲。</div>
+  <div class="sub">原本四種近50期彩券分析完整保留；群組輸入「搜尋＋問題」就能查資料，不用＠。找圖片請自行使用 Google 圖片搜尋；一般對話與小工具保留 @機器人。</div>
 
   <section class="card">
     <h2>目前狀態</h2>
@@ -35,7 +35,7 @@
   <section class="card">
     <h2>@機器人自動回答</h2>
     <div class="games">
-      <div class="game"><strong>犀利AI＋搜尋</strong><span>回答直接、有結論；被挑釁時會用一句有梗的話反擊，最新資訊會自動搜尋。</span><code>@機器人 今天有什麼重要新聞</code></div>
+      <div class="game"><strong>犀利AI＋搜尋</strong><span>搜尋指令不用＠，查資料並附上來源。圖片搜尋暫不支援。</span><code>搜尋 今天台灣重要新聞</code></div>
       <div class="game"><strong>台灣天氣</strong><span>免費查詢今天、明天或後天縣市預報。</span><code>@機器人 台北明天天氣</code></div>
       <div class="game"><strong>圖片理解</strong><span>先傳圖片，10分鐘內再提及機器人。</span><code>@機器人 這張圖片有什麼？</code></div>
       <div class="game"><strong>免費小工具</strong><span>計算、抽籤、骰子、硬幣、猜拳及隨機數。</span><code>@機器人 功能</code></div>
@@ -57,7 +57,7 @@
     <div class="step"><div class="n">1</div><p>在Cloudflare設定LINE Channel Secret、Access Token、限定群組及GEMINI_API_KEY。</p></div>
     <div class="step"><div class="n">2</div><p>把本專案連接GitHub，部署命令使用 npx wrangler deploy --config wrangler.toml。</p></div>
     <div class="step"><div class="n">3</div><p>將下方網址貼到LINE Developers的Webhook URL：<span class="url" id="webhookUrl"></span><span class="actions"><button id="copyWebhook">複製Webhook網址</button></span></p></div>
-    <div class="step"><div class="n">4</div><p>部署後原本四個彩券關鍵字照常使用；一般聊天只有真正 @機器人 時才會回覆。</p></div>
+    <div class="step"><div class="n">4</div><p>四個彩券關鍵字照常使用；「搜尋＋問題」不用＠，其他一般聊天須真正 @機器人 才會回覆。</p></div>
   </section>
 
   <section class="card">

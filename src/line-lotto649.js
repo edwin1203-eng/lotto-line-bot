@@ -10,8 +10,9 @@ const {
 } = require('./lib/games')
 const { aiModel, generateAIReply } = require('./lib/ai')
 const { HELP_TEXT, tryFreeTool } = require('./lib/free-tools')
+const { IMAGE_SEARCH_REPLY, parseSearchCommand, isImageSearchRequest } = require('./lib/search-command')
 
-const VERSION = '2.3.1-cloudflare-search'
+const VERSION = '2.3.2-cloudflare-search-command'
 const LINE_REPLY_URL = 'https://api.line.me/v2/bot/message/reply'
 const DEFAULT_GROUP_ID_COMMAND = '取得群組ID'
 const IMAGE_TTL_MS = 10 * 60 * 1000
@@ -141,8 +142,9 @@ async function handleMessage(event) {
 
   const mentioned = isBotMentioned(event.message)
   const prompt = mentioned ? removeBotMention(event.message) : rawText.trim()
+  const search = parseSearchCommand(prompt)
   const game = resolveGame(normalizedText(prompt))
-  if (!game && !mentioned) return
+  if (!game && !mentioned && !search) return
   if (!allowedGroups.length) {
     await replyMessage(event.replyToken, `尚未綁定群組。\n請先輸入「${groupIdCommand()}」取得群組ID。`)
     return
@@ -150,6 +152,14 @@ async function handleMessage(event) {
   if (!isAllowedGroup) return
 
   try {
+    if (search?.image || isImageSearchRequest(prompt)) {
+      await replyMessage(event.replyToken, IMAGE_SEARCH_REPLY)
+      return
+    }
+    if (search && !search.query) {
+      await replyMessage(event.replyToken, '請在「搜尋」後輸入問題，例如：搜尋 今天台中天氣')
+      return
+    }
     if (game) {
       const result = await analyzeGame(game)
       await replyMessage(event.replyToken, result.text)
@@ -161,19 +171,19 @@ async function handleMessage(event) {
       return
     }
 
-    const freeToolAnswer = await tryFreeTool(prompt)
+    const freeToolAnswer = search ? null : await tryFreeTool(prompt)
     if (freeToolAnswer) {
       await replyMessage(event.replyToken, freeToolAnswer)
       return
     }
 
-    const savedImage = wantsImage(prompt) ? recentImageFor(event) : null
-    if (wantsImage(prompt) && !savedImage) {
+    const savedImage = !search && wantsImage(prompt) ? recentImageFor(event) : null
+    if (!search && wantsImage(prompt) && !savedImage) {
       await replyMessage(event.replyToken, '請先傳一張圖片，再於10分鐘內 @我 提問，例如「@機器人 這張圖片有什麼？」')
       return
     }
     const answer = await generateAIReply({
-      text: prompt,
+      text: search ? `請使用 Google 搜尋查證以下問題，依搜尋結果回答並提供來源。若沒有搜尋結果，明確說明未能查證，不要假裝已搜尋。問題：${search.query}` : prompt,
       imageMessageId: savedImage?.messageId || '',
       history: chatHistoryFor(event)
     })
